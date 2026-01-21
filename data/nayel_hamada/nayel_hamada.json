@@ -1,0 +1,11 @@
+{
+  "nom": "Hamada",
+  "prenom": "Nayel",
+  "age": 22,
+  "situation": "Apprenti",
+  "preferences": {
+    "theme": "dark",
+    "langue": "fr",
+    "interets": "Audios"
+  }
+}
