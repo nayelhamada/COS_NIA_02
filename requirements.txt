@@ -7,5 +7,3 @@ langchain-core
 pypdf
 chromadb
 sentence-transformers
-os
-tempfile
