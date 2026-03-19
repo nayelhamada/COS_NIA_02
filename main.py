@@ -39,7 +39,7 @@ if "messages" not in st.session_state: st.session_state.messages = []
 
 # --- SIDEBAR (LOGIN & PROFIL) ---
 with st.sidebar:
-    st.header("🔒 Authentication")
+    st.header("🔒 Login")
     
     # cas 1 : utilisateur connecté
     if st.session_state["user_session"]:
@@ -76,7 +76,7 @@ with st.sidebar:
             # Formulaire de mise à jour
             with st.form("update_profile_full"):
                 st.markdown("**Identity**")
-                new_role = st.selectbox("Spéciality", list_roles, index=list_roles.index(default_role))
+                new_role = st.selectbox("Speciality", list_roles, index=list_roles.index(default_role))
                 new_goal = st.text_input("Mission Objective", value=raw_goal, placeholder="Ex: Assistant")
                 
                 st.markdown("**AI Preferences**")
@@ -123,9 +123,9 @@ with st.sidebar:
         
         with t1:
             with st.form("login_form"):
-                u = st.text_input("Matricule (User)")
-                p = st.text_input("Code d'accès (Pass)", type="password")
-                if st.form_submit_button("S'identifier"):
+                u = st.text_input("Username")
+                p = st.text_input("Password", type="password")
+                if st.form_submit_button("Log in"):
                     d, m = auth.verify_credentials(u, p)
                     if d: 
                         st.session_state["user_session"] = d
@@ -136,8 +136,8 @@ with st.sidebar:
         with t2:
             st.markdown("Join **Spaceflight Institute**")
             with st.form("signup_form"):
-                u = st.text_input("New Matricule (User)")
-                p = st.text_input("Create Access Code", type="password")
+                u = st.text_input("New Username")
+                p = st.text_input("Create Password", type="password")
                 
                 c1, c2 = st.columns(2)
                 with c1:
@@ -157,7 +157,7 @@ with st.sidebar:
     
     st.divider()
     if st.button("🛑 Stop system"):
-        st.warning("Arrêt forcé et fermeture des fenêtres...")
+        st.warning("Forcing shutdown of Streamlit and Ollama...")
         
         # Script AppleScript avec mise au premier plan (activate)
         applescript = """
@@ -258,7 +258,7 @@ if prompt := st.chat_input("Your question or command..."):
     with st.chat_message("assistant"):
         
         # Interception des mots-clés du planning 
-        mots_cles_planning = ["planif", "agenda", "emploi du temps"]
+        mots_cles_planning = ["plan", "agenda", "emploi du temps"]
         if any(kw in prompt.lower() for kw in mots_cles_planning):
             st.caption("🗓️ Generating schedule...")
             
